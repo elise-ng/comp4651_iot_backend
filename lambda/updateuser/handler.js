@@ -25,7 +25,6 @@ module.exports = async (event, context) => {
       { id: user.id },
       { $set: user }
     )
-    client.close()
 
     if (result.matchedCount !== 1) { throw new HttpError(404, 'user not found') }
 

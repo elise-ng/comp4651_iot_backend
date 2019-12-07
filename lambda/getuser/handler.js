@@ -20,10 +20,10 @@ module.exports = async (event, context) => {
     // upsert record on db
     await client.connect()
     const collection = client.db(MongoDBName).collection('users')
-    const result = await collection.find(
-      { id }
-    ).project({ _id: 0 }).limit(1).toArray()
-    client.close()
+    const result = await collection.find({ id })
+      .project({ _id: 0 })
+      .limit(1)
+      .toArray()
 
     if (result.length < 1) { throw new HttpError(404, 'user not found') }
 
