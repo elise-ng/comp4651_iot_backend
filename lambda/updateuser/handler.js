@@ -2,44 +2,47 @@
 const MongoClient = require('mongodb').MongoClient
 const HttpError = require('standard-http-error')
 
-// TODO: read from env var from deployment
-const MongoURL = 'mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local'
-const MongoDBName = 'iot_backend'
+const MongoURL = process.env.mongo_url
+const MongoDBName = process.env.mongo_dbname
 
 module.exports = async (event, context) => {
+  const client = new MongoClient(MongoURL)
   try {
     // input validation
     const user = event.body.user
-    if (!user) { throw new HttpError(400, 'User is empty') }
-    if (!user.id) { throw new HttpError(400, 'User id is empty') }
+    if (!user) { throw new HttpError(400, 'user object is empty') }
+    if (!user.id) { throw new HttpError(400, 'user id is empty') }
 
     // upsert record on db
-    const client = await MongoClient.connect(MongoURL)
+    await client.connect()
     const collection = client.db(MongoDBName).collection('users')
-    const mongoResult = await collection.updateOne(
+    const result = await collection.updateOne(
       { id: user.id },
-      { $set: user },
-      { upsert: true }
+      { $set: user }
     )
     client.close()
+
+    if (result.matchedCount !== 1) { throw new HttpError(404, 'user not found') }
 
     // success response
     return context
       .status(200)
       .headers({ 'Content-Type': 'application/json' })
-      .succeed(JSON.stringify({
+      .succeed(JSON.stringify({ // force response to be in json as auto content type is not reliable
         success: true,
-        user,
-        debug_mongoResult: mongoResult
+        user
       }))
   } catch (e) {
     // error response
     return context
       .status(e.code || 500)
       .headers({ 'Content-Type': 'application/json' })
-      .fail(JSON.stringify({
+      .succeed(JSON.stringify({ // use .succeed() as .fail() overwrites headers or content type
         success: false,
         error: e.message
       }))
+  } finally {
+    // close db connection
+    client.close()
   }
 }

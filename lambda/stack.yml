@@ -6,6 +6,7 @@ functions:
   updateuser:
     lang: node12
     handler: ./updateuser
-    image: chihimng/comp4651_iot_backend_updateuser:0.0.6
+    image: chihimng/comp4651_iot_backend_updateuser:0.0.13 # increment version number per change, faas do not always pull :latest every deployment
     environment:
-      write_debug: true
+      mongo_url: mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local
+      mongo_dbname: iot_backend
