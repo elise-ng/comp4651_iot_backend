@@ -4,6 +4,10 @@ This folder contains the code of our lambda functions, as well as scripts and co
 
 Please refer to our project report for usage.
 
+## Web API Documentation
+
+See [Documentation Website](https://documenter.getpostman.com/view/8525618/SWE56ysT)
+
 ## File Structure and description
 
 Only important files are included.
