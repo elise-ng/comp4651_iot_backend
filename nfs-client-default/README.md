@@ -1,17 +1,17 @@
-#Create a dynamic persistent volumn provisioner
+# Create a dynamic persistent volumn provisioner
 
 Here describe the steps to create a dynamic persistent volumn provisioner in k8s cluster by using NFS.
 
-##Steps:
+## Steps:
 
-###(Optional)1. Create a new instance with large enough disk space
+### (Optional)1. Create a new instance with large enough disk space
 
-###2. Install nfs-server in the created/selected machine (Ubuntu work as follow)
+### 2. Install nfs-server in the created/selected machine (Ubuntu work as follow)
 ```
 sudo apt-get install nfs-kernel-server
 ```
 
-###3. Specify the directory to be exposed/shared
+### 3. Specify the directory to be exposed/shared
 ```
 # suppose /srv/nfs/kubedata will be the directory to expose
 sudo mkdir -p /srv/nfs/kubedata
@@ -27,13 +27,13 @@ sudo chmod -R 777 /srv/nfs
 sudo exportfs -rav
 ```
 
-###4. Install nfs-common on access nodes (the nodes that are going to use the exposed directory above)
+### 4. Install nfs-common on access nodes (the nodes that are going to use the exposed directory above)
 ```
 sudo apt-get install nfs-common
 ```
 
 
-###5. (Optional)Login to access nodes to test the mount
+### 5. (Optional)Login to access nodes to test the mount
 ```
 # go to access node
 ssh <access-node>
@@ -52,7 +52,7 @@ cd ~
 sudo umount /mnt
 ```
 
-###6. Download yaml files from [nfs-client-provisioner](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client/deploy)
+### 6. Download yaml files from [nfs-client-provisioner](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client/deploy)
 ```
 # Run the command in Master Node!!
 

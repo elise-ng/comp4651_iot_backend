@@ -4,24 +4,24 @@ Descheduler helps to balance pod distribution among all the nodes.
 Here is the [sample](./sample-deploy) yaml files to install and test
 
 
-###Steps to apply the descheduler
+### Steps to apply the descheduler
 
-####1. Create permission to allow delete pods
+#### 1. Create permission to allow delete pods
 ```
 kubectl create -f rbac.yaml
 ```
 
-####2. Create policy to redistribute pods
+#### 2. Create policy to redistribute pods
 ```
 kubectl create -f configmap.yaml
 ```
 
-####3. Create cronjob/job to regularly do the checking(specify the policies inside cronjob.yaml)
+#### 3. Create cronjob/job to regularly do the checking(specify the policies inside cronjob.yaml)
 ```
 kubectl create -f cronjob.yaml
 ```
 
-####4. (Optional) Create deployment to test the descheduler
+#### 4. (Optional) Create deployment to test the descheduler
 Steps:
 1. Only Keep in Node in the cluster
 2. Create the deployment
