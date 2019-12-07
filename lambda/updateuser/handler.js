@@ -2,25 +2,22 @@
 const MongoClient = require('mongodb').MongoClient
 const HttpError = require('standard-http-error')
 
+// TODO: read from env var from deployment
 const MongoURL = 'mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local'
 const MongoDBName = 'iot_backend'
 
 module.exports = async (event, context) => {
   try {
     // input validation
-    let user = event.body.user
+    const user = event.body.user
     if (!user) { throw new HttpError(400, 'User is empty') }
     if (!user.id) { throw new HttpError(400, 'User id is empty') }
-
-    // copy id and strip from object
-    const id = user.id
-    delete user.id
 
     // upsert record on db
     const client = await MongoClient.connect(MongoURL)
     const collection = client.db(MongoDBName).collection('users')
-    const result = await collection.updateOne(
-      { id },
+    const mongoResult = await collection.updateOne(
+      { id: user.id },
       { $set: user },
       { upsert: true }
     )
@@ -32,7 +29,8 @@ module.exports = async (event, context) => {
       .headers({ 'Content-Type': 'application/json' })
       .succeed(JSON.stringify({
         success: true,
-        debug_mongoResult: result
+        user,
+        debug_mongoResult: mongoResult
       }))
   } catch (e) {
     // error response
