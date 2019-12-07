@@ -7,10 +7,10 @@
 # turnoff swap
 sudo swapoff -a
 
-# allow docker to be run as non-root user
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
+# (Optional) allow docker to be run as non-root user
+# sudo groupadd docker
+# sudo usermod -aG docker $USER
+# newgrp docker
 
 # install docker
 sudo apt-get update

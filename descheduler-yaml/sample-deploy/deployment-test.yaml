@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-descheduler
+  labels:
+    app: test-des-deploy
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: test-des
+  template:
+    metadata:
+      labels:
+        app: test-des
+    spec:
+      containers:
+      - name: test-des-pod
+        image: nginx
+        ports:
+        - containerPort: 80
+
