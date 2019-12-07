@@ -1,5 +1,7 @@
 ## YAML to deploy openfaas to k8s cluster
 
+OpenFaaS handles the auto scaling of pods according to the number of requests or other factors e.g CPU/Memory, the scaling factor can be set during deployment of a Function
+
 This folder contains all the yaml files from https://github.com/openfaas/faas-netes/tree/master/yaml
 
 ## Steps:

@@ -1,5 +1,7 @@
 # Create a dynamic persistent volumn provisioner
 
+Since K8s run pods(docker images) in each nodes to provide service, so when the pod goes down, then the storage of that pod will gone, so there should be some external storage to provide database service, Persistent Volumn is one solution to that.
+
 Here describe the steps to create a dynamic persistent volumn provisioner in k8s cluster by using NFS.
 
 ## Steps:
