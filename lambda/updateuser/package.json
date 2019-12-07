@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.3.5",
+    "standard-http-error": "^2.0.1"
+  }
 }

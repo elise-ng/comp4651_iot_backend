@@ -3,7 +3,7 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  createuser:
+  updateuser:
     lang: node12
-    handler: ./createuser
-    image: createuser:latest
+    handler: ./updateuser
+    image: updateuser:latest
