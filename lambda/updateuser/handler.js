@@ -1,6 +1,6 @@
 'use strict'
-import { MongoClient } from 'mongodb'
-import HttpError from 'standard-http-error'
+const MongoClient = require('mongodb').MongoClient
+const HttpError = require('standard-http-error')
 
 const MongoURL = 'mongodb://mongodb.mongodb.svc.cluster.local'
 const MongoDBName = 'iot_backend'
@@ -25,17 +25,17 @@ module.exports = async (event, context) => {
     // success response
     return context
       .status(200)
-      .success({
+      .success(JSON.stringify({
         success: true,
         result
-      })
+      }))
   } catch (e) {
     // error response
     return context
-      .status(500)
-      .fail({
+      .status(e.code || 500)
+      .fail(JSON.stringify({
         success: false,
-        error: e.toString()
-      })
+        error: e.message
+      }))
   }
 }

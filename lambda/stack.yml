@@ -6,4 +6,6 @@ functions:
   updateuser:
     lang: node12
     handler: ./updateuser
-    image: updateuser:latest
+    image: chihimng/comp4651_iot_backend_updateuser:latest
+    environment:
+      write_debug: true
