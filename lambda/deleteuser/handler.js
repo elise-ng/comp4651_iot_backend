@@ -6,21 +6,21 @@ const MongoURL = process.env.mongo_url
 const MongoDBName = process.env.mongo_dbname
 
 /**
- * Lambda function for deleting user by id
- * Usage: input an user object with id field
+ * Lambda function for deleting user by email
+ * Usage: input an user object, required fields: email
  */
 
 module.exports = async (event, context) => {
   const client = new MongoClient(MongoURL)
   try {
     // input validation
-    const id = event.body.id
-    if (!id) { throw new HttpError(400, 'user id is empty') }
+    const email = event.body.email
+    if (!email) { throw new HttpError(400, 'user email is empty') }
 
-    // upsert record on db
+    // delete record on db
     await client.connect()
     const collection = client.db(MongoDBName).collection('users')
-    const result = await collection.deleteOne({ id })
+    const result = await collection.deleteOne({ email })
 
     if (result.deletedCount < 1) { throw new HttpError(404, 'user not found') }
 

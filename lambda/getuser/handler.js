@@ -6,21 +6,21 @@ const MongoURL = process.env.mongo_url
 const MongoDBName = process.env.mongo_dbname
 
 /**
- * Lambda function for getting user by id
- * Usage: input an user object with id field
+ * Lambda function for getting user by email
+ * Usage: input an user object, required fields: email
  */
 
 module.exports = async (event, context) => {
   const client = new MongoClient(MongoURL)
   try {
     // input validation
-    const id = event.body.id
-    if (!id) { throw new HttpError(400, 'user id is empty') }
+    const email = event.body.email
+    if (!email) { throw new HttpError(400, 'user id is empty') }
 
-    // upsert record on db
+    // find record on db
     await client.connect()
     const collection = client.db(MongoDBName).collection('users')
-    const result = await collection.find({ id })
+    const result = await collection.find({ email })
       .project({ _id: 0 })
       .limit(1)
       .toArray()
