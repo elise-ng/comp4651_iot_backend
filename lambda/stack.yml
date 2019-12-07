@@ -17,3 +17,10 @@ functions:
     environment:
       mongo_url: mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local
       mongo_dbname: iot_backend
+  deleteuser:
+    lang: node12
+    handler: ./deleteuser
+    image: chihimng/comp4651_iot_backend_deleteuser:0.0.1
+    environment:
+      mongo_url: mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local
+      mongo_dbname: iot_backend
