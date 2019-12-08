@@ -1,0 +1,33 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  updateuser:
+    lang: node12
+    handler: ./updateuser
+    image: chihimng/comp4651_iot_backend_updateuser:0.1.0 # increment version number per change, faas do not always pull :latest every deployment
+    environment:
+      mongo_url: mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local
+      mongo_dbname: iot_backend
+  getuser:
+    lang: node12
+    handler: ./getuser
+    image: chihimng/comp4651_iot_backend_getuser:0.1.0
+    environment:
+      mongo_url: mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local
+      mongo_dbname: iot_backend
+  deleteuser:
+    lang: node12
+    handler: ./deleteuser
+    image: chihimng/comp4651_iot_backend_deleteuser:0.1.0
+    environment:
+      mongo_url: mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local
+      mongo_dbname: iot_backend
+  createuser:
+    lang: node12
+    handler: ./createuser
+    image: chihimng/comp4651_iot_backend_createuser:0.1.0
+    environment:
+      mongo_url: mongodb://lambda:lambda@mongodb.mongodb.svc.cluster.local
+      mongo_dbname: iot_backend
