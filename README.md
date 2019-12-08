@@ -11,7 +11,7 @@
 ## Background
 Serverless architecture offers great scalability and flexibility for programmers, in that development of the business logic can be focused on, while the deployment and server maintainence work are offloaded to the framework. As both of our FYP are related to IoT devices, where the number of requests to backend fluctuates and system availability is of paramount importance, a serverless backend service is greatly beneficial where it is very scalable. This can also help reduce the cost of maintainence since server instances can be created and set up automatically.
 
-![](https://i.imgur.com/gkCgDCi.jpg =500x)
+![](https://i.imgur.com/gkCgDCi.jpg)
 
 ## Development of web APIs as lambda functions on OpenFaaS
 This section covers the process of developing web APIs as lambda functions with OpenFaaS from a backend developer standpoint. We will explain the technology stack used, our api design and database schema and finally the work flow of development.
@@ -23,7 +23,7 @@ For our project, API endpoints were developed for client apps or IoT devices to 
 In contrast to AWS Lambda, which accepts and runs handler scripts directly, OpenFaaS packages the script as Docker images for execution. With this approach, lambda function code have to be built into Docker images, pushed onto a container registry and finally pulled and run by workers pods on the server. To facilitate this deployment flow, OpenFaaS provides a CLI tool `faas-cli` for developers to execute each action from their machine.
 
 
-![](https://i.imgur.com/9sEeio2.png =500x)
+![](https://i.imgur.com/9sEeio2.png)
 
 As denoted in the diagram above, we used NodeJS to write handler functions and Docker Hub to host built images.
 
@@ -189,6 +189,6 @@ Lastly, more lambda functions can be implemented to further ease the development
 To demo our serverless IoT backend system, we have created a scalable cluster with AWS EC2 instances and deployed our lambda functions to the OpenFaaS instance hosted on that cluster. The functions are configured to scale automatically by OpenFaaS. API requests were made to test that our lambda functions execute correctly.
 
 The picture shows that all the pods running to support the four functions.
-![](https://i.imgur.com/91gG2Ou.png =500x)
+![](https://i.imgur.com/91gG2Ou.png)
 
 [more demo](https://github.com/Benker-Leung/comp4651_iot_backend/tree/master/auto-scaling-demo)
