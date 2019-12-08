@@ -2,7 +2,7 @@
 
 This folder contains the code of our lambda functions, as well as scripts and configurations necessary to replicate our work locally.
 
-Please refer to our project report for usage.
+Please refer to our project report for usage. [Draft of Project Report on this part](https://hackmd.io/@chihimng/HJtx85FaB)
 
 ## Web API Documentation
 
